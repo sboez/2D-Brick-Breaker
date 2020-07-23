@@ -16,22 +16,22 @@
 
 ## Assets
 
-:loud_sound: 8-Bit sounds were picked on [OpenGameArt](https://opengameart.org/)
+All sounds and sprites were picked on [OpenGameArt](https://opengameart.org/)
 
 
 ## Improvements / Features 
 
 List of improvements after the base repository :
 
-- [ ] Add animated title screen
-- [ ] Add music to the title screen
+- [x] Add animated title screen
+- [x] Add music to the title screen
 - [ ] Update input text
 - [ ] Add difficulty levels
 - [ ] Add objects to collect
 - [ ] Update mobile device game size
 - [ ] Add bricks explosion animation
 - [ ] Add a scoreboard at the end
-- [ ] Update assets
+- [x] Update assets
 
 
 ## Usage
