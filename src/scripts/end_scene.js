@@ -18,6 +18,8 @@ export default class EndScene extends Phaser.Scene {
 	}
 
 	create() {
+		this.background = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, 328, 600, 'background');
+
 		this.winnerSound = this.sound.add('winner');
 		this.looserSound = this.sound.add('looser');
 		this.clickSound = this.sound.add('soundMenu');
@@ -62,5 +64,9 @@ export default class EndScene extends Phaser.Scene {
 		this.WINNER ? this.winnerSound.stop() : this.looserSound.stop();
 		this.clickSound.play();
 		this.scene.start('GameScene', { name: this.yourName });
+	}
+
+	update() {
+		this.background.tilePositionX -= .3;
 	}
 }

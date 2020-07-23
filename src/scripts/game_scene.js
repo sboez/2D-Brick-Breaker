@@ -4,10 +4,9 @@ export default class GameScene extends Phaser.Scene {
 	}
 
 	preload() {
-		this.load.image('background', 'assets/Game/training_court.png');
 		this.load.image('ball', 'assets/Game/ball.png');
-		this.load.image('paddle', 'assets/Game/baton.png');
-		this.load.image('brick', 'assets/Game/brique-bleu.png');
+		this.load.image('paddle', 'assets/Game/paddle.png');
+		this.load.image('brick', 'assets/Game/orange_brick.png');
 
 		this.load.audio('hit', [ "assets/Sounds/Hit.mp3" ]);
 		this.load.audio('shoot', [ "assets/Sounds/Shoot.mp3" ]);
@@ -32,7 +31,7 @@ export default class GameScene extends Phaser.Scene {
 		this.shootSound = this.sound.add('shoot');
 		this.deadSound = this.sound.add('dead');
 
-		this.add.image(0, 0, 'background').setOrigin(0).setScale(0.3);
+		this.add.image(0, 0, 'background').setOrigin(0).setScale(1.5);
 
 		this.setBricks();
 		this.setPlayer();
@@ -54,7 +53,7 @@ export default class GameScene extends Phaser.Scene {
 
 		for (let i = 0; i < 7; ++i) {
 			for (let j = 0; j < 6; ++j) {
-				const brick = this.physics.add.sprite(60 + i * 30, 150 + j * 20, 'brick').setOrigin(0).setScale(0.3);
+				const brick = this.physics.add.sprite(40 + i * 35, 150 + j * 20, 'brick').setOrigin(0).setScale(0.08);
 				this.bricks.add(brick);
 			}
 		}
@@ -63,8 +62,8 @@ export default class GameScene extends Phaser.Scene {
 	/* Set the paddle sprite and add collider */
 	setPlayer() {
 		this.player = this.physics.add.sprite(this.cameras.main.centerX, 500, 'paddle');
-		this.player.displayWidth = 70;
-		this.player.displayHeight = 10;
+		this.player.displayWidth = 80;
+		this.player.displayHeight = 15;
 
 		this.player.setCollideWorldBounds(true);
 		this.player.setImmovable(true);
@@ -100,7 +99,7 @@ export default class GameScene extends Phaser.Scene {
 	}
 
 	setText() {
-		const style = { fontFamily: 'myFont', fontSize: '24px', fill: '#000' };
+		const style = { fontFamily: 'myFont', fontSize: '24px', fill: '#fff' };
 
 		this.scoreText = this.add.text(70, 35, 'Score: 0', style);
 
@@ -172,7 +171,7 @@ export default class GameScene extends Phaser.Scene {
 		this.lives -= 1;
 		this.livesText.setText('Lives: ' + this.lives);
 
-		if (this.lives < 0) this.gameOver();
+		if (this.lives <= 0) this.gameOver();
 	}
 
 	gameOver() {

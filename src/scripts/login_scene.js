@@ -5,8 +5,15 @@ export default class LoginScene extends Phaser.Scene {
 		super({ key: 'LoginScene' });
 	}
 
+	/* Get music from LoginScene */
+	init(data) {
+		this.backgroundMusic = data.music;
+	}
+
 	create() {
 		const style = { fontFamily: 'myFont', fontSize: 24 };
+
+		this.background = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, 328, 600, 'background');
 
 		this.clickSound = this.sound.add('soundMenu');
 
@@ -45,6 +52,13 @@ export default class LoginScene extends Phaser.Scene {
 		if (this.inputText.text === '' || this.inputText.text.length < 3 || /\s/.test(this.inputText.text))
 			alert("Sorry, your name is invalid");
 		else if (this.inputText.text.length > 9) alert("Sorry, your name is too big");
-		else this.scene.start('GameScene', { name: this.yourName });
+		else {
+			this.backgroundMusic.stop();
+			this.scene.start('GameScene', { name: this.yourName });
+		}
+	}
+	
+	update() {
+		this.background.tilePositionX -= .3;
 	}
 }

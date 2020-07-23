@@ -1,6 +1,6 @@
 # 2D-Brick-Breaker
 
-![GitHub top language](https://img.shields.io/github/languages/top/sboez/Lost_Mechanics_Test)  <img src="https://img.shields.io/badge/phaser-3.23-orange">
+![GitHub top language](https://img.shields.io/github/languages/top/sboez/Lost_Mechanics_Test)  <img src="https://img.shields.io/badge/phaser-3.24.1-orange">
 
 
 2D Brick Breaker - Improvements of [this technical test](https://github.com/sboez/Lost_Mechanics_Test)
@@ -23,15 +23,15 @@
 
 List of improvements after the base repository :
 
-[ ] Add animated title screen
-[ ] Add music to the title screen
-[ ] Update input text
-[ ] Add difficulty levels
-[ ] Add objects to collect
-[ ] Update mobile device game size
-[ ] Add bricks explosion animation
-[ ] Add a scoreboard at the end
-[ ] Update assets
+- [ ] Add animated title screen
+- [ ] Add music to the title screen
+- [ ] Update input text
+- [ ] Add difficulty levels
+- [ ] Add objects to collect
+- [ ] Update mobile device game size
+- [ ] Add bricks explosion animation
+- [ ] Add a scoreboard at the end
+- [ ] Update assets
 
 
 ## Usage

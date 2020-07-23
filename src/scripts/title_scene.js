@@ -6,15 +6,20 @@ export default class TitleScene extends Phaser.Scene {
 	}
 
 	preload() {
+		this.load.image('background', 'assets/Game/background.jpg');
 		this.load.image('logo', 'assets/Game/logo.png');
-		this.load.image('trophy', 'assets/Game/trophee.png');
 
-		this.load.spritesheet('buttons', "assets/Game/buttons_spritesheet.png", { frameWidth: 115, frameHeight: 42 });
+		this.load.spritesheet('buttons', "assets/Game/buttons_spritesheet.png", { frameWidth: 115, frameHeight: 46 });
 
+		this.load.audio('music', [ "assets/Sounds/cyberpunk_moonlight_sonata.mp3" ]);
 		this.load.audio('soundMenu', [ "assets/Sounds/Menu_Navigate.mp3" ]);
 	}
 
 	create() {
+		this.background = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, 328, 600, 'background');
+
+		this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 70, 'logo').setScale(0.12);
+
 		/* With mobile device the game should be fullscreen */
 		if (!this.sys.game.device.os.desktop) {
 			this.scale.scaleMode = Phaser.Scale.ScaleModes.NONE;
@@ -22,12 +27,11 @@ export default class TitleScene extends Phaser.Scene {
 		}
 
 		this.clickSound = this.sound.add('soundMenu');
+		this.backgroundMusic = this.sound.add('music', { loop: true });
+		this.backgroundMusic.play();
 
 		/* Sounds will be not paused when game looses focus */
 		this.sound.pauseOnBlur = false;
-
-		this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 120, 'logo');
-		this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'trophy').setScale(.4);
 
 		/* Button and label are in a container to get the text centered */
 		const button = new Button(this, 0, 0, 'buttons', 0, 1, 2).on('pointerup', this.onPressed, this);
@@ -42,6 +46,10 @@ export default class TitleScene extends Phaser.Scene {
 
 	onPressed() {
 		this.clickSound.play();
-		this.scene.start('LoginScene');
+		this.scene.start('LoginScene', { music: this.backgroundMusic });
+	}
+
+	update() {
+		this.background.tilePositionX -= .3;
 	}
 }
