@@ -7,6 +7,8 @@ export default class GameScene extends Phaser.Scene {
 		this.load.image('ball', 'assets/Game/ball.png');
 		this.load.image('paddle', 'assets/Game/paddle.png');
 		this.load.image('brick', 'assets/Game/orange_brick.png');
+		this.load.image('spark0', 'assets/Game/white.png');
+		this.load.image('spark1', 'assets/Game/red.png');
 
 		this.load.audio('hit', [ "assets/Sounds/laser.wav" ]);
 		this.load.audio('shoot', [ "assets/Sounds/impact.wav" ]);
@@ -33,6 +35,7 @@ export default class GameScene extends Phaser.Scene {
 
 		this.add.image(0, 0, 'background').setOrigin(0).setScale(1.5);
 
+		this.setParticles();
 		this.setBricks();
 		this.setPlayer();
 		this.setBall();
@@ -43,6 +46,19 @@ export default class GameScene extends Phaser.Scene {
 
 		this.setControls();
 		this.setText();
+	}
+
+	setParticles() {
+		this.config = {
+			x: -1000,
+			y: -1000,
+			speed: { min: -100, max: 100 },
+			scale: { start: 0.3, end: 0 },
+			gravityY: 200
+		};
+
+		this.particle0 = this.add.particles('spark0').createEmitter(this.config);
+		this.particle1 = this.add.particles('spark1').createEmitter(this.config);
 	}
 
 	/* Set 42 bricks. 7 columns, 6 lines */
@@ -118,9 +134,12 @@ export default class GameScene extends Phaser.Scene {
 		});
 	}
 
-	/* Hide brick after collision, a brick give 20 score pts */
+	/* Emit particles after collision and hide brick, a brick give 20 score pts */
 	hitBrick(ball, brick) {
 		this.hitSound.play();
+
+		this.particle0.setPosition(brick.x, brick.y).explode();
+        this.particle1.setPosition(brick.x, brick.y).explode();
 
 		brick.disableBody(true, true);
 
@@ -152,7 +171,7 @@ export default class GameScene extends Phaser.Scene {
 	}
 
 	isWon() {
-		return this.bricks.countActive() === 40;
+		return this.bricks.countActive() === 0;
 	}
 
 	resetBall() {
