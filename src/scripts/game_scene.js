@@ -8,9 +8,9 @@ export default class GameScene extends Phaser.Scene {
 		this.load.image('paddle', 'assets/Game/paddle.png');
 		this.load.image('brick', 'assets/Game/orange_brick.png');
 
-		this.load.audio('hit', [ "assets/Sounds/Hit.mp3" ]);
-		this.load.audio('shoot', [ "assets/Sounds/Shoot.mp3" ]);
-		this.load.audio('dead', [ "assets/Sounds/Explosion.mp3" ]);
+		this.load.audio('hit', [ "assets/Sounds/laser.wav" ]);
+		this.load.audio('shoot', [ "assets/Sounds/impact.wav" ]);
+		this.load.audio('dead', [ "assets/Sounds/falling.wav" ]);
 	}
 
 	/* Get yourName value from LoginScene */
@@ -152,7 +152,7 @@ export default class GameScene extends Phaser.Scene {
 	}
 
 	isWon() {
-		return this.bricks.countActive() === 0;
+		return this.bricks.countActive() === 40;
 	}
 
 	resetBall() {

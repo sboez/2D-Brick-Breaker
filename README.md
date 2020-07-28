@@ -16,7 +16,9 @@
 
 ## Assets
 
-All sounds and sprites were picked on [OpenGameArt](https://opengameart.org/)
+:loud_sound: All sounds and sprites were picked on [OpenGameArt](https://opengameart.org/)
+
+:art: The logo was made with [Adobe Spark](https://spark.adobe.com/fr-FR/make/logo-maker/)
 
 
 ## Improvements / Features 
