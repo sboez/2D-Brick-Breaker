@@ -30,6 +30,7 @@ const config = {
 			gravity: false
 		},
 	},
+	pixelArt: true,
 	scene: [
 		TitleScene,
 		LoginScene,

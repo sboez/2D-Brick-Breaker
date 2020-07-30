@@ -36,7 +36,7 @@ export default class GameScene extends Phaser.Scene {
 		this.deadSound = this.sound.add('dead');
 		this.coinSound = this.sound.add('coin');
 
-		this.rd = this.getRandomInt(42);
+		this.rd = this.getRandomInt(40);
 
 		this.add.image(0, 0, 'background').setOrigin(0).setScale(1.5);
 

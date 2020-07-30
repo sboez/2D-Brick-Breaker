@@ -1,13 +1,10 @@
 # 2D-Brick-Breaker
 
-![GitHub top language](https://img.shields.io/github/languages/top/sboez/Lost_Mechanics_Test)  <img src="https://img.shields.io/badge/phaser-3.24.1-orange">
+![GitHub top language](https://img.shields.io/github/languages/top/sboez/Lost_Mechanics_Test)  <img src="https://img.shields.io/badge/phaser-3.24.1-orange">  ![GitHub](https://img.shields.io/github/license/sboez/2D-Brick-Breaker)
 
 
-2D Brick Breaker - Improvements of [this technical test](https://github.com/sboez/Lost_Mechanics_Test)
+2D Brick Breaker - Improvements of [this technical test](https://github.com/sboez/Lost_Mechanics_Test) - [Demo](https://d-brick-breaker-2cddf.web.app/)
 
-:video_game: [Live Demo](https://d-brick-breaker-2cddf.web.app/)
-
-## Work in progress... :construction:
 
 ## Challenges
 
