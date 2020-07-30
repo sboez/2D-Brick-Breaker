@@ -7,7 +7,7 @@ export default class LoginScene extends Phaser.Scene {
 
 	/* Get music from LoginScene */
 	init(data) {
-		this.backgroundMusic = data.music;
+		this.bgMusic = data.music;
 	}
 
 	create() {
@@ -27,8 +27,8 @@ export default class LoginScene extends Phaser.Scene {
 			fontFamily: 'myFont',
 			fontSize: '22px',
 			border: 1,
-			borderColor: '#fff',
-			backgroundColor: '#888E8E'
+			borderColor: '#7A8080',
+			backgroundColor: '#525656'
 		})
 		.selectText()
 		.setBlur()
@@ -53,7 +53,7 @@ export default class LoginScene extends Phaser.Scene {
 			alert("Sorry, your name is invalid");
 		else if (this.inputText.text.length > 9) alert("Sorry, your name is too big");
 		else {
-			this.backgroundMusic.stop();
+			this.bgMusic.stop();
 			this.scene.start('GameScene', { name: this.yourName });
 		}
 	}

@@ -23,15 +23,15 @@
 
 ## Improvements / Features 
 
-List of improvements after the base repository :
+List of improvements after the original repository :
 
 - [x] Add animated title screen
 - [x] Add music to the title screen
 - [ ] Update input text
 - [ ] Add difficulty levels
-- [ ] Add objects to collect
+- [x] Add objects to collect
 - [ ] Update mobile device game size
-- [ ] Add bricks explosion animation
+- [x] Add bricks explosion animation
 - [ ] Add a scoreboard at the end
 - [x] Update assets
 

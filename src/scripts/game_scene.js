@@ -7,12 +7,14 @@ export default class GameScene extends Phaser.Scene {
 		this.load.image('ball', 'assets/Game/ball.png');
 		this.load.image('paddle', 'assets/Game/paddle.png');
 		this.load.image('brick', 'assets/Game/orange_brick.png');
+		this.load.image('star', 'assets/Game/star.png');
 		this.load.image('spark0', 'assets/Game/white.png');
 		this.load.image('spark1', 'assets/Game/red.png');
 
 		this.load.audio('hit', [ "assets/Sounds/laser.wav" ]);
 		this.load.audio('shoot', [ "assets/Sounds/impact.wav" ]);
 		this.load.audio('dead', [ "assets/Sounds/falling.wav" ]);
+		this.load.audio('coin', [ "assets/Sounds/coin.wav" ]);
 	}
 
 	/* Get yourName value from LoginScene */
@@ -32,12 +34,15 @@ export default class GameScene extends Phaser.Scene {
 		this.hitSound = this.sound.add('hit');
 		this.shootSound = this.sound.add('shoot');
 		this.deadSound = this.sound.add('dead');
+		this.coinSound = this.sound.add('coin');
+
+		this.rd = this.getRandomInt(42);
 
 		this.add.image(0, 0, 'background').setOrigin(0).setScale(1.5);
 
-		this.setParticles();
-		this.setBricks();
 		this.setPlayer();
+		this.setBricks();
+		this.setParticles();
 		this.setBall();
 
 		this.physics.world.checkCollision.down = false;
@@ -48,17 +53,14 @@ export default class GameScene extends Phaser.Scene {
 		this.setText();
 	}
 
-	setParticles() {
-		this.config = {
-			x: -1000,
-			y: -1000,
-			speed: { min: -100, max: 100 },
-			scale: { start: 0.3, end: 0 },
-			gravityY: 200
-		};
+	/* Set the paddle sprite and add collider */
+	setPlayer() {
+		this.player = this.physics.add.sprite(this.cameras.main.centerX, 500, 'paddle');
+		this.player.displayWidth = 80;
+		this.player.displayHeight = 15;
 
-		this.particle0 = this.add.particles('spark0').createEmitter(this.config);
-		this.particle1 = this.add.particles('spark1').createEmitter(this.config);
+		this.player.setCollideWorldBounds(true);
+		this.player.setImmovable(true);
 	}
 
 	/* Set 42 bricks. 7 columns, 6 lines */
@@ -75,14 +77,17 @@ export default class GameScene extends Phaser.Scene {
 		}
 	}
 
-	/* Set the paddle sprite and add collider */
-	setPlayer() {
-		this.player = this.physics.add.sprite(this.cameras.main.centerX, 500, 'paddle');
-		this.player.displayWidth = 80;
-		this.player.displayHeight = 15;
+	setParticles() {
+		this.config = {
+			x: -1000,
+			y: -1000,
+			speed: { min: -100, max: 100 },
+			scale: { start: 0.3, end: 0 },
+			gravityY: 200
+		};
 
-		this.player.setCollideWorldBounds(true);
-		this.player.setImmovable(true);
+		this.particle0 = this.add.particles('spark0').createEmitter(this.config);
+		this.particle1 = this.add.particles('spark1').createEmitter(this.config);
 	}
 
 	/* Set the ball sprite and add collider, the ball is 'attached' to the paddle */
@@ -124,7 +129,7 @@ export default class GameScene extends Phaser.Scene {
 		this.startText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY,
 			'Press SPACE or TAP to Start', style).setOrigin(0.5);
 
-		/* Start text infinite animation */
+		/* Start animation text */
 		this.tweens.add({ 
 			targets: this.startText, 
 			alpha: { from: 0, to: 1 }, 
@@ -132,6 +137,24 @@ export default class GameScene extends Phaser.Scene {
 			duration: 1000, 
 			repeat: -1 
 		});
+	}
+
+	setStar() {
+		this.star = this.physics.add.sprite(150, 200, 'star');
+		this.star.setScale(0.2);
+		this.star.body.gravity.y = 200;
+
+		this.physics.add.overlap(this.player, this.star, this.collectStar, null, this);
+	}
+
+	/* A star give 50 score pts */
+	collectStar(player, star) {
+		star.disableBody(true, true);
+
+		this.coinSound.play();
+
+		this.score += 50;
+		this.scoreText.setText('Score: ' + this.score);
 	}
 
 	/* Emit particles after collision and hide brick, a brick give 20 score pts */
@@ -145,6 +168,8 @@ export default class GameScene extends Phaser.Scene {
 
 		this.score += 20;
 		this.scoreText.setText('Score: ' + this.score);
+
+		if (this.bricks.countActive() === this.rd) this.setStar();
 	}
 
 	/* Set reverse ball direction compared to the player */
@@ -172,6 +197,10 @@ export default class GameScene extends Phaser.Scene {
 
 	isWon() {
 		return this.bricks.countActive() === 0;
+	}
+
+	getRandomInt(max) {
+		return Math.floor(Math.random() * Math.floor(max));
 	}
 
 	resetBall() {

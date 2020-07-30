@@ -16,6 +16,9 @@ export default class TitleScene extends Phaser.Scene {
 	}
 
 	create() {
+		this.bgMusic = this.sound.add('music', { locked: false, loop: true });
+		this.bgMusic.play();
+		
 		this.background = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, 328, 600, 'background');
 
 		this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 70, 'logo').setScale(0.12);
@@ -27,8 +30,6 @@ export default class TitleScene extends Phaser.Scene {
 		}
 
 		this.clickSound = this.sound.add('soundMenu');
-		this.backgroundMusic = this.sound.add('music', { loop: true });
-		this.backgroundMusic.play();
 
 		/* Sounds will be not paused when game looses focus */
 		this.sound.pauseOnBlur = false;
@@ -46,7 +47,7 @@ export default class TitleScene extends Phaser.Scene {
 
 	onPressed() {
 		this.clickSound.play();
-		this.scene.start('LoginScene', { music: this.backgroundMusic });
+		this.scene.start('LoginScene', { music: this.bgMusic });
 	}
 
 	update() {
