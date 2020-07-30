@@ -5,6 +5,8 @@
 
 2D Brick Breaker - Improvements of [this technical test](https://github.com/sboez/Lost_Mechanics_Test)
 
+:video_game: [Live Demo](https://d-brick-breaker-2cddf.web.app/)
+
 ## Work in progress... :construction:
 
 ## Challenges
@@ -34,6 +36,7 @@ List of improvements after the original repository :
 - [x] Add bricks explosion animation
 - [ ] Add a scoreboard at the end
 - [x] Update assets
+- [ ] Add all images to a spritesheet
 
 
 ## Usage
